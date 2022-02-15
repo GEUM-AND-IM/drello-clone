@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createGlobalStyle } from "styled-components";
+import { RecoilRoot } from "recoil";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
 import App from "./App";
+import { theme } from "./theme";
 
 const GlobalStyle = createGlobalStyle`
 html{
@@ -45,7 +47,7 @@ body {
   box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
-  background-color: #F9F9F9;
+  background-color: ${(props) => props.theme.bgColor};
 }
 
 *{
@@ -71,8 +73,12 @@ table {
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalStyle />
-    <App />
+    <RecoilRoot>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <App />
+      </ThemeProvider>
+    </RecoilRoot>
   </React.StrictMode>,
   document.getElementById("root")
 );

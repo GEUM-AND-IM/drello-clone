@@ -1,20 +1,2 @@
-# How do you make it work?
-
-    $ npm run dev
-    $ yarn dev
-
-# How do you build it?
-
-    $ npm run build
-    $ yarn build
-
-# Structure
-
-    ├─ public
-    │  └─ index.html
-    ├─ src
-    │  ├─ App.tsx
-    │  └─ index.tsx
-    ├─ .babelrc
-    ├─ package.json
-    └─ tsconfig.json
+드래그앤 드랍 기술을 활용한 투두리스트 (with Redux)
+일단은 레코일로 했습니다. 리덕스 조금만 더 공부하고.. 리덕스로...
