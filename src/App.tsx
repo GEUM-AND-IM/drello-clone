@@ -22,6 +22,8 @@ const App = () => {
 
   const onDragEnd = (info: DropResult): void => {
     const { destination, source, draggableId } = info;
+    console.log(info);
+    if (!destination) return;
     if (destination?.droppableId === source.droppableId) {
       setToDos((prev) => {
         const boardCopy = [...prev[source.droppableId]];
@@ -29,7 +31,19 @@ const App = () => {
         boardCopy.splice(destination.index, 0, draggableId);
         return { ...prev, [destination.droppableId]: boardCopy };
       });
+      return;
     }
+    setToDos((prev) => {
+      const sourceBoard = [...prev[source.droppableId]];
+      const destinationBoard = [...prev[destination.droppableId]];
+      sourceBoard.splice(source.index, 1);
+      destinationBoard.splice(destination.index, 0, draggableId);
+      return {
+        ...prev,
+        [source.droppableId]: sourceBoard,
+        [destination.droppableId]: destinationBoard,
+      };
+    });
   };
 
   return (

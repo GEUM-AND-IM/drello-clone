@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { RecoilRoot } from "recoil";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { createGlobalStyle, css, ThemeProvider } from "styled-components";
 import App from "./App";
 import { theme } from "./theme";
 
@@ -47,7 +47,9 @@ body {
   box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
-  background-color: ${(props) => props.theme.bgColor};
+	background : ${(props) => `
+     linear-gradient(180deg, ${props.theme.mainColor}, ${props.theme.subColor});
+  `};
 }
 
 *{
