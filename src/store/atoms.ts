@@ -1,6 +1,14 @@
 import { atom } from "recoil";
 
-export const toDoAtom = atom({
+interface IToDoAtomProps {
+  [key: string]: string[];
+}
+
+export const toDoAtom = atom<IToDoAtomProps>({
   key: "toDo",
-  default: ["a", "b", "c", "d", "e", "f"],
+  default: {
+    미완료: ["a", "b", "c", "d", "e", "f"],
+    "진행 중": ["s", "l"],
+    완료: ["k", "h", "j"],
+  },
 });

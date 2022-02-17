@@ -3,10 +3,13 @@ import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 
 const Card = styled.div`
+  width: 100%;
+  height: 40px;
   padding: 5px 10px;
   background-color: ${(props) => props.theme.cardColor};
   border-radius: 5px;
   margin-bottom: 5px;
+  box-sizing: border-box;
 
   -webkit-user-select: none;
   -moz-user-select: none;
