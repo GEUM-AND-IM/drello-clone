@@ -6,6 +6,7 @@ import App from "./App";
 import { theme } from "./theme";
 
 const GlobalStyle = createGlobalStyle`
+
 html{
 	height: 100%;
 }
@@ -29,8 +30,9 @@ time, mark, audio, video {
 	font-size: 100%;
 	//font: inherit;
 	vertical-align: baseline;
-    font-family: "Roboto", sans-serif;
-    text-decoration: none;
+	@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@300&family=Noto+Sans+KR&display=swap');  	font-family: 'Noto Sans KR', sans-serif;
+	font-family: 'Noto Sans KR', sans-serif;
+	text-decoration: none;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -52,9 +54,6 @@ body {
   `};
 }
 
-*{
-  
-}
 
 menu, ol, ul {
 	list-style: none;
