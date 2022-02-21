@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Droppable } from "react-beautiful-dnd";
 import { useForm } from "react-hook-form";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { IToDoItem, toDoAtom } from "../../store/atoms";
+import { useDispatch } from "react-redux";
+import { IToDoItem } from "../../interface/IToDo";
+import { addCard } from "../../modules/CardChange";
 import BoardItem from "../BoardItem";
 import {
   BoardItemWrap,
@@ -21,15 +22,11 @@ interface IForm {
 }
 
 const Board: React.FC<IBoardProps> = ({ boardId, items }) => {
-  const setToDos = useSetRecoilState(toDoAtom);
+  const dispatch = useDispatch();
 
   const { register, setValue, handleSubmit } = useForm<IForm>();
   const onValid = ({ toDo }: IForm) => {
-    const newTodo: IToDoItem = {
-      id: Date.now(),
-      text: toDo,
-    };
-    setToDos((prev) => ({ ...prev, [boardId]: [newTodo, ...prev[boardId]] }));
+    dispatch(addCard(boardId, Date.now(), toDo));
     setValue("toDo", "");
   };
 

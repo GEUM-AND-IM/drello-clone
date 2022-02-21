@@ -1,9 +1,13 @@
 import { createReducer } from "typesafe-actions";
-import { IToDoAtomProps } from "../../interface/IToDo";
-import { NOT_SAME_BOARD_CARD_CHANGE, SAME_BOARD_CARD_CHANGE } from "./actions";
+import { IToDoBoardProps } from "../../interface/IToDo";
+import {
+  ADD_CARD,
+  NOT_SAME_BOARD_CARD_CHANGE,
+  SAME_BOARD_CARD_CHANGE,
+} from "./actions";
 import { TCardChangeAction } from "./types";
 
-const initialState: IToDoAtomProps = {
+const initialState: IToDoBoardProps = {
   미완료: [
     { id: 1, text: "리덕스 사가 공부하기" },
     { id: 2, text: "JEST 공부하기" },
@@ -16,21 +20,50 @@ const initialState: IToDoAtomProps = {
   완료: [],
 };
 
-const cardChange = createReducer<IToDoAtomProps, TCardChangeAction>(
+const cardChange = createReducer<IToDoBoardProps, TCardChangeAction>(
   initialState,
   {
+    [ADD_CARD]: (state, action) => {
+      return {
+        ...state,
+        [action.payload.boardId]: [
+          ...state[action.payload.boardId],
+          action.payload.newToDo,
+        ],
+      };
+    },
+
     [SAME_BOARD_CARD_CHANGE]: (state, action) => {
-      const boardCopy = [...state[action.payload.source.droppableId]];
-      const taskObj = boardCopy[action.payload.source.index];
-      boardCopy.splice(action.payload.source.index, 1);
-      boardCopy.splice(action.payload.destination?.index as number, 0, taskObj);
+      const {
+        payload: { source, destination },
+      } = action;
+
+      const boardCopy = [...state[source.droppableId]];
+      const taskObj = boardCopy[source.index];
+      boardCopy.splice(source.index, 1);
+      boardCopy.splice(destination?.index as number, 0, taskObj);
 
       return {
         ...state,
         [action.payload.destination?.droppableId as string]: boardCopy,
       };
     },
-    [NOT_SAME_BOARD_CARD_CHANGE]: (state, action) => state,
+    [NOT_SAME_BOARD_CARD_CHANGE]: (state, action) => {
+      const {
+        payload: { source, destination },
+      } = action;
+      const sourceBoard = [...state[source.droppableId]];
+      const destinationBoard = [...state[destination?.droppableId as string]];
+      const taskObj = sourceBoard[source.index];
+      sourceBoard.splice(source.index, 1);
+      destinationBoard.splice(destination?.index as number, 0, taskObj);
+
+      return {
+        ...state,
+        [source.droppableId]: sourceBoard,
+        [destination?.droppableId as string]: destinationBoard,
+      };
+    },
   }
 );
 

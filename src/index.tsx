@@ -3,7 +3,8 @@ import ReactDOM from "react-dom";
 import { Provider as ReduxProvider } from "react-redux";
 import { RecoilRoot } from "recoil";
 import { createStore } from "redux";
-import { createGlobalStyle, css, ThemeProvider } from "styled-components";
+import { composeWithDevTools } from "redux-devtools-extension";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
 import App from "./App";
 import rootReducer from "./modules";
 import { theme } from "./theme";
@@ -75,7 +76,7 @@ table {
 }
 `;
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, composeWithDevTools());
 
 ReactDOM.render(
   <React.StrictMode>

@@ -3,6 +3,6 @@ export interface IToDoItem {
   text: string;
 }
 
-export interface IToDoAtomProps {
+export interface IToDoBoardProps {
   [key: string]: IToDoItem[];
 }

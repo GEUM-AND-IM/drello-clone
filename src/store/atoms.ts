@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-export interface IToDoItem {
+interface IToDoItem {
   id: number;
   text: string;
 }
