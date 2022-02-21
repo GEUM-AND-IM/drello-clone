@@ -1,8 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider as ReduxProvider } from "react-redux";
 import { RecoilRoot } from "recoil";
+import { createStore } from "redux";
 import { createGlobalStyle, css, ThemeProvider } from "styled-components";
 import App from "./App";
+import rootReducer from "./modules";
 import { theme } from "./theme";
 
 const GlobalStyle = createGlobalStyle`
@@ -72,13 +75,17 @@ table {
 }
 `;
 
+const store = createStore(rootReducer);
+
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <App />
-      </ThemeProvider>
+      <ReduxProvider store={store}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <App />
+        </ThemeProvider>
+      </ReduxProvider>
     </RecoilRoot>
   </React.StrictMode>,
   document.getElementById("root")

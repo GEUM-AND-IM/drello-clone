@@ -1,7 +1,10 @@
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import { useDispatch, useSelector } from "react-redux";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import Board from "./components/Board";
+import { TRootState } from "./modules";
+import { sameBoardCardChange } from "./modules/CardChange";
 import { toDoAtom } from "./store/atoms";
 
 const Wrapper = styled.div`
@@ -18,34 +21,30 @@ const Boards = styled.div`
 `;
 
 const App = () => {
-  const [toDos, setToDos] = useRecoilState(toDoAtom);
+  const toDos = useSelector((state: TRootState) => state.CardChange);
+
+  const dispatch = useDispatch();
 
   const onDragEnd = (info: DropResult): void => {
-    const { destination, source, draggableId } = info;
+    const { destination, source } = info;
     console.log(info);
     if (!destination) return;
     if (destination?.droppableId === source.droppableId) {
-      setToDos((prev) => {
-        const boardCopy = [...prev[source.droppableId]];
-        const taskObj = boardCopy[source.index];
-        boardCopy.splice(source.index, 1);
-        boardCopy.splice(destination.index, 0, taskObj);
-        return { ...prev, [destination.droppableId]: boardCopy };
-      });
+      dispatch(sameBoardCardChange(info));
       return;
     }
-    setToDos((prev) => {
-      const sourceBoard = [...prev[source.droppableId]];
-      const destinationBoard = [...prev[destination.droppableId]];
-      const taskObj = sourceBoard[source.index];
-      sourceBoard.splice(source.index, 1);
-      destinationBoard.splice(destination.index, 0, taskObj);
-      return {
-        ...prev,
-        [source.droppableId]: sourceBoard,
-        [destination.droppableId]: destinationBoard,
-      };
-    });
+    // setToDos((prev) => {
+    //   const sourceBoard = [...prev[source.droppableId]];
+    //   const destinationBoard = [...prev[destination.droppableId]];
+    //   const taskObj = sourceBoard[source.index];
+    //   sourceBoard.splice(source.index, 1);
+    //   destinationBoard.splice(destination.index, 0, taskObj);
+    //   return {
+    //     ...prev,
+    //     [source.droppableId]: sourceBoard,
+    //     [destination.droppableId]: destinationBoard,
+    //   };
+    // });
   };
 
   return (
