@@ -2,6 +2,7 @@ import { createReducer } from "typesafe-actions";
 import { IToDoBoardProps } from "../../interface/IToDo";
 import {
   ADD_CARD,
+  DELETE_CARD,
   NOT_SAME_BOARD_CARD_CHANGE,
   SAME_BOARD_CARD_CHANGE,
 } from "./actions";
@@ -29,6 +30,15 @@ const cardChange = createReducer<IToDoBoardProps, TCardChangeAction>(
         [action.payload.boardId]: [
           ...state[action.payload.boardId],
           action.payload.newToDo,
+        ],
+      };
+    },
+
+    [DELETE_CARD]: (state, action) => {
+      return {
+        ...state,
+        [action.payload.boardId]: [
+          ...state[action.payload.boardId].splice(action.payload.index, 1),
         ],
       };
     },

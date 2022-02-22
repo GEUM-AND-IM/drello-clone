@@ -20,8 +20,12 @@ export const addCard = (boardId: string, id: number, text: string) => ({
   },
 });
 
-export const deleteCard = (boardId: string, id: number) => ({
+export const deleteCard = (boardId: string, index: number) => ({
   type: DELETE_CARD,
+  payload: {
+    boardId,
+    index,
+  },
 });
 
 export const sameBoardCardChange = ({ destination, source }: DropResult) => ({

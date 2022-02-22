@@ -1,10 +1,12 @@
-import { DragDropContext, DropResult } from "react-beautiful-dnd";
+import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import Board from "./components/Board";
+import RemoveArea from "./components/RemoveArea";
 import { TRootState } from "./modules";
 import {
+  deleteCard,
   notSameBoardCardChange,
   sameBoardCardChange,
 } from "./modules/CardChange";
@@ -15,6 +17,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  position: relative;
 `;
 
 const Boards = styled.div`
@@ -35,6 +38,10 @@ const App = () => {
       dispatch(sameBoardCardChange(info));
       return;
     }
+    if (destination.droppableId === "delete") {
+      dispatch(deleteCard(source.droppableId, source.index));
+      return;
+    }
     dispatch(notSameBoardCardChange(info));
   };
 
@@ -46,6 +53,7 @@ const App = () => {
             <Board boardId={boardId} items={toDos[boardId]} key={boardId} />
           ))}
         </Boards>
+        <RemoveArea droppableId="delete" />
       </Wrapper>
     </DragDropContext>
   );
