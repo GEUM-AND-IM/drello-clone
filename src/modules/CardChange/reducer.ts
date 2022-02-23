@@ -35,11 +35,12 @@ const cardChange = createReducer<IToDoBoardProps, TCardChangeAction>(
     },
 
     [DELETE_CARD]: (state, action) => {
+      const boardCopy = [...state[action.payload.boardId]];
+      boardCopy.splice(action.payload.index, 1);
+
       return {
         ...state,
-        [action.payload.boardId]: [
-          ...state[action.payload.boardId].splice(action.payload.index, 1),
-        ],
+        [action.payload.boardId]: boardCopy,
       };
     },
 

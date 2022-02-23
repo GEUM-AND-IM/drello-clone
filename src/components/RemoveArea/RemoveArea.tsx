@@ -8,10 +8,12 @@ interface IRemoveArea {
 const RemoveArea: React.FC<IRemoveArea> = ({ droppableId }) => {
   return (
     <Droppable droppableId={droppableId}>
-      {(provided) => (
+      {(provided, snapshot) => (
         <RemoveAreaWrap
           ref={provided.innerRef}
+          isDraggingOver={snapshot.isDraggingOver}
           {...provided.droppableProps}
+          style={{ background: `${snapshot.isDraggingOver ? "" : "none"}` }}
         ></RemoveAreaWrap>
       )}
     </Droppable>

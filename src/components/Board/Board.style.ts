@@ -11,6 +11,7 @@ export const BoardBox = styled.div<{ isDraggingOver: boolean }>`
   background-color: #d8d2cb;
   overflow: hidden;
   overflow-y: scroll;
+
   ${(props) =>
     props.isDraggingOver &&
     css`

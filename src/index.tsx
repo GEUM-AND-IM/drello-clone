@@ -53,10 +53,10 @@ body {
   box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
-	/* background : ${(props) => `
+	background : ${(props) => `
      linear-gradient(180deg, ${props.theme.mainColor}, ${props.theme.subColor});
-  `}; */
-  background-color: #3f3e3e;
+  `};
+  /* background-color: #3f3e3e; */
 }
 
 menu, ol, ul {
