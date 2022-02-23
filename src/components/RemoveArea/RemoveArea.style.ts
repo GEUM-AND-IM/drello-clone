@@ -1,14 +1,28 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const RemoveAreaWrap = styled.div<{ isDraggingOver: boolean }>`
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: ${(props) => (props.isDraggingOver ? "200px" : "150px")};
-  height: ${(props) => (props.isDraggingOver ? "200px" : "150px")};
-  background: ${(props) =>
-    props.isDraggingOver &&
-    `linear-gradient(to bottom right, #e30000 , ${props.theme.subColor})`};
+  width: 100%;
+  height: 64px;
+  background-color: ${(props) => props.theme.cardColor};
+  border-radius: 100%;
   transition: 1s;
-  border-bottom-right-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ${(props) =>
+    props.isDraggingOver &&
+    css`
+      top: 0px;
+      right: 0px;
+      transform-origin: top right;
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      transition: 1s;
+    `}
+
+  img {
+    width: 50%;
+  }
 `;

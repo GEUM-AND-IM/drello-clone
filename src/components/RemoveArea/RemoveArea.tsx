@@ -13,8 +13,14 @@ const RemoveArea: React.FC<IRemoveArea> = ({ droppableId }) => {
           ref={provided.innerRef}
           isDraggingOver={snapshot.isDraggingOver}
           {...provided.droppableProps}
-          style={{ background: `${snapshot.isDraggingOver ? "" : "none"}` }}
-        ></RemoveAreaWrap>
+        >
+          <img
+            src={
+              "https://icons-for-free.com/iconfiles/png/512/delete+remove+trash+trash+bin+trash+can+icon-1320073117929397588.png"
+            }
+            alt="trash"
+          />
+        </RemoveAreaWrap>
       )}
     </Droppable>
   );

@@ -4,6 +4,7 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import Board from "./components/Board";
 import RemoveArea from "./components/RemoveArea";
+import SideBar from "./components/SideBar";
 import { TRootState } from "./modules";
 import {
   deleteCard,
@@ -53,7 +54,8 @@ const App = () => {
             <Board boardId={boardId} items={toDos[boardId]} key={boardId} />
           ))}
         </Boards>
-        <RemoveArea droppableId="delete" />
+        {/* <RemoveArea droppableId="delete" /> */}
+        <SideBar droppableItemsId={["delete"]} />
       </Wrapper>
     </DragDropContext>
   );
