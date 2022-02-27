@@ -19,6 +19,7 @@ const Wrapper = styled.div`
   align-items: center;
   height: 100vh;
   position: relative;
+  overflow: hidden;
 `;
 
 const Boards = styled.div`

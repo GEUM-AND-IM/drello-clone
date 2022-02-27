@@ -14,6 +14,7 @@ export const SideBarItemsWrap = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   background-color: ${(props) => props.theme.subColor};
   padding: 15px;
   position: relative;

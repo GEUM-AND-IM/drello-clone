@@ -13,13 +13,9 @@ export const RemoveAreaWrap = styled.div<{ isDraggingOver: boolean }>`
   ${(props) =>
     props.isDraggingOver &&
     css`
-      top: 0px;
-      right: 0px;
-      transform-origin: top right;
-      position: absolute;
-      width: 180px;
-      height: 180px;
-      transition: 1s;
+      transition: 0.5s ease-in-out;
+      background-color: red;
+      box-shadow: 1px 10px 90px 10px red;
     `}
 
   img {
